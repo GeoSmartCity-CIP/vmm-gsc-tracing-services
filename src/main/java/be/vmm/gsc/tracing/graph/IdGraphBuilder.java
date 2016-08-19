@@ -5,6 +5,7 @@ import be.vmm.gsc.tracing.data.model.Rioollink;
 import be.vmm.gsc.tracing.util.Timer;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultDirectedGraph;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  *
  * Created by s.vanmieghem on 15/12/2015.
  */
+@Component
 public class IdGraphBuilder {
 
     /**

@@ -12,6 +12,7 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,8 +40,9 @@ public class TracingController {
     @GET
     @RequestMapping(value = "/{reverse}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @CrossOrigin("*")
     public String trace(@PathVariable Boolean reverse,
-                            @PathVariable("id") Integer id) {
+                        @PathVariable("id") Integer id) {
         List<Rioollink> rioollinks = rioollinkDao.findAllIdsOnly();
 
         final Graph<Integer, Integer> g = IdGraphBuilder.build(rioollinks, reverse);

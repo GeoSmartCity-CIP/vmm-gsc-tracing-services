@@ -17,4 +17,4 @@ mvn install
 your host and port /tracing/{true/false}/{id}
 
 ## Licence 
-*vmm-gsc-tracing* is free software, and may be redistributed under the MIT-LICENSE.
+*vmm-gsc-tracing-services* is free software, and may be redistributed under the MIT-LICENSE.

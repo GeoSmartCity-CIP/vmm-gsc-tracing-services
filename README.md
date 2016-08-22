@@ -17,7 +17,7 @@ mvn install
 ```
 
 ## How to start
-Run the main method in AppConfiguration.java
+Run the main method in AppConfiguration.java<br />
 *default port = 8080, you can change it by setting the VM option -Dserver.port=1234*
 
 
@@ -32,11 +32,11 @@ Current implementation builds and traces an DirectedGraph<Integer, Integer> wher
 After tracing we fetchAll entities by a collections of Integers (the ids).
 
 **RioollinkGraphBuilder**
-RioollinkGraphBuilder is similar to IdGraphBuilder but it contains the entity instead of the id.
-If you use RioollinkGraphBuilder the initial query will be slower but that will be the only one.
+RioollinkGraphBuilder is similar to IdGraphBuilder but it contains the entity instead of the id.<br />
+If you use RioollinkGraphBuilder the initial query will be slower but that will be the only one.<br />
 If the data is static you can opt to enable caching.
 
-If scaling becomes an issue it's advised to initialize the tracing graph at the start of the application.
+If scaling becomes an issue it's advised to initialize the tracing graph at the start of the application.<br />
 This will make the graph static.
 
 ## Licence 

@@ -28,7 +28,7 @@ second parameter is the id from where the tracing needs to start
 
 ##Performance / info
 **IdGraphBuilder**
-Current implementation builds and traces an DirectedGraph<Integer, Integer> where the second Integer is the feature Id.
+Current implementation builds and traces an DirectedGraph&lt;Integer, Integer&gt; where the second Integer is the feature Id.<br />
 After tracing we fetchAll entities by a collections of Integers (the ids).
 
 **RioollinkGraphBuilder**

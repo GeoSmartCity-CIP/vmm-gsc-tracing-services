@@ -5,7 +5,7 @@ Tracing the Flanders sewer network
 * Working implementation, up for review.
 
 ## Configuration
-database properties have to be set in tracing.spring.xml
+database properties have to be set in tracing.spring.xml<br />
 if there is a specific CORS url you can set it in  TracingController.java with the annotation @CrossOrigin("yourspecificUrl:134")
 
 ## How to install
@@ -17,8 +17,8 @@ mvn install
 ```
 
 ##Rest API GET
-your host and port /tracing/{true/false}/{id}
-first parameter defines if you want to check up or downstream
+your host and port /tracing/{true/false}/{id}<br />
+first parameter defines if you want to check up or downstream<br />
 second parameter is the id from where the tracing needs to start
 
 ## Licence 

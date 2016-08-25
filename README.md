@@ -31,7 +31,7 @@ Deploy the war artifact on an application server.
 
 ##Rest API GET
 Request:
-**/trace/{upstream|downstream}/{id}**<br />
+**/tracing/{upstream|downstream}/{id}**<br />
 first parameter defines if you want to trace up- or downstream<br />
 second parameter is the id from where the tracing needs to start
 

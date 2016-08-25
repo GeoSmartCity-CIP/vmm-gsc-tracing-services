@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tracing")
+@RequestMapping("/trace")
 public class TracingController {
 
     @Autowired

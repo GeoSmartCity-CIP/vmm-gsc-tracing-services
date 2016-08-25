@@ -31,9 +31,9 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgis.DriverWrapper"/>
-        <property name="url" value="jdbc:postgresql_postGIS://localhost:5432/gsc"/>
-        <property name="username" value="****"/>
-        <property name="password" value="****"/>
+        <property name="url" value="jdbc:postgresql_postGIS://${db.hostport}/gsc"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
     </bean>
 
 

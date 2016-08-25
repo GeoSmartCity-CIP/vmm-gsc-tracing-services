@@ -1,10 +1,10 @@
 package be.vmm.gsc.tracing.webservice.controller;
 
-import be.vmm.gsc.tracing.data.dao.IRioollinkDao;
 import be.vmm.gsc.tracing.data.model.Rioollink;
-import be.vmm.gsc.tracing.graph.IdGraphBuilder;
+import be.vmm.gsc.tracing.graph.GraphCache;
 import be.vmm.gsc.tracing.service.FeatureService;
 import be.vmm.gsc.tracing.service.GeoJSONService;
+import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
 import org.jgrapht.event.EdgeTraversalEvent;
 import org.jgrapht.event.TraversalListenerAdapter;
@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.wololo.geojson.Feature;
-import org.wololo.geojson.GeoJSON;
-import org.wololo.jts2geojson.GeoJSONWriter;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
@@ -31,39 +29,47 @@ import java.util.List;
 public class TracingController {
 
     @Autowired
-    private IRioollinkDao rioollinkDao;
+    private GraphCache cache;
+
     @Autowired
     private FeatureService featureService;
     @Autowired
     private GeoJSONService geoJSONService;
 
     @GET
-    @RequestMapping(value = "/{reverse}/{id}")
+    @RequestMapping(value = "/{updown}/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @CrossOrigin("*")
-    public String trace(@PathVariable Boolean reverse,
+    public String trace(@PathVariable String updown,
                         @PathVariable("id") Integer id) {
-        List<Rioollink> rioollinks = rioollinkDao.findAllIdsOnly();
 
-        final Graph<Integer, Integer> g = IdGraphBuilder.build(rioollinks, reverse);
-        final Graph<Integer, Integer> trace = new DefaultDirectedGraph<>(Integer.class);
-        final List<Integer> rioollinkIds = new ArrayList<>();
-        BreadthFirstIterator iter = new BreadthFirstIterator<>(g, id);
+        DirectedGraph<Integer, Rioollink> graph;
+        if ("downstream".equalsIgnoreCase(updown)) {
+            graph = cache.getDownstream();
+        } else {
+            graph = cache.getUpstream();
+        }
+
+        // trace result
+        List<Rioollink> rioollinken = new ArrayList<>();
+
+        // graph iteration
+        final Graph<Integer, Rioollink> trace = new DefaultDirectedGraph(Rioollink.class);
+        BreadthFirstIterator iter = new BreadthFirstIterator<>(graph, id);
         iter.addTraversalListener(new TraversalListenerAdapter() {
             @Override
             public void edgeTraversed(EdgeTraversalEvent event) {
-                Integer edge = (Integer) event.getEdge();
-                trace.addVertex(g.getEdgeSource(edge));
-                trace.addVertex(g.getEdgeTarget(edge));
-                trace.addEdge(g.getEdgeSource(edge), g.getEdgeTarget(edge), edge);
-                rioollinkIds.add(edge);
+                Rioollink edge = (Rioollink)event.getEdge();
+                trace.addVertex(graph.getEdgeSource(edge));
+                trace.addVertex(graph.getEdgeTarget(edge));
+                trace.addEdge(graph.getEdgeSource(edge), graph.getEdgeTarget(edge), edge);
+                rioollinken.add(edge);
             }
         });
-
         while (iter.hasNext()) {
             iter.next();
         }
-        List<Rioollink> rioollinken = rioollinkDao.findAll(rioollinkIds);
+
         return createJsonResponse(rioollinken).toString();
     }
 

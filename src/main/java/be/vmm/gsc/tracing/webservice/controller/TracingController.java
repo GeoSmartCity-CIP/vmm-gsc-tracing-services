@@ -12,15 +12,9 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.wololo.geojson.Feature;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +30,9 @@ public class TracingController {
     @Autowired
     private GeoJSONService geoJSONService;
 
-    @GET
-    @RequestMapping(value = "/{updown}/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @RequestMapping(value = "/{updown}/{id}", method = RequestMethod.GET, produces = "application/json")
     @CrossOrigin("*")
+    @ResponseBody
     public String trace(@PathVariable String updown,
                         @PathVariable("id") Integer id) {
 
@@ -78,6 +71,3 @@ public class TracingController {
         return geoJSONService.getJsonResponse(features);
     }
 }
-
-
-

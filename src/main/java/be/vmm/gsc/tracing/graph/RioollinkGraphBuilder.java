@@ -15,7 +15,7 @@ import java.util.List;
 public class RioollinkGraphBuilder {
     /**
      * @param links
-     * @param reverse true: edge from end to start (downstream); false: edge from start to end (upstream)
+     * @param reverse true: edge from end to start (upstream); false: edge from start to end (downstream)
      * @return a graph with identifiers for nodes (koppelpunten) and edges (rioollinken); unlinked nodes not retained in the graph
      */
     public static DirectedGraph<Integer, Rioollink> build(List<Rioollink> links, boolean reverse) {

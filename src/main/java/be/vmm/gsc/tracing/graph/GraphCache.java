@@ -31,8 +31,8 @@ public class GraphCache {
     public void init() {
         log.info("Build upstream and downstream network.");
         List<Rioollink> rioollinks = rioollinkDao.findAll();
-        upstream = RioollinkGraphBuilder.build(rioollinks, false);
-        downstream = RioollinkGraphBuilder.build(rioollinks, true);
+        upstream = RioollinkGraphBuilder.build(rioollinks, true);
+        downstream = RioollinkGraphBuilder.build(rioollinks, false);
     }
 
     public DirectedGraph<Integer, Rioollink> getUpstream() {

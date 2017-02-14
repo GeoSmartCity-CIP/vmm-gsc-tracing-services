@@ -8,7 +8,7 @@ import java.util.List;
  * Created by s.vanmieghem on 15/12/2015.
  */
 @Entity
-@Table(name="koppelpunt", schema="gengis")
+@Table(name="koppelpunt")
 public class Koppelpunt {
 
     @Id

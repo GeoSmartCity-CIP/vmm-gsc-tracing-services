@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by s.vanmieghem on 15/12/2015.
  */
 @Entity
-@Table(name="rioollink",schema="gengis")
+@Table(name="rioollink")
 public class Rioollink {
 
     public Rioollink() {
